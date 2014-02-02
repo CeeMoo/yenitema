@@ -3,7 +3,7 @@
  * Simple Machines Forum (SMF)
  *
  * @package SMF
- * @author Simple Machines
+ * @author Simple Machines http://www.simplemachines.org
  * @copyright 2014 Simple Machines and individual contributors
  * @license http://www.simplemachines.org/about/smf/license.php BSD
  *
@@ -79,37 +79,11 @@ function template_newsfader()
 
 function template_main()
 {
-	global $context, $settings, $options, $txt, $scripturl, $modSettings;
+	global $context, $settings, $txt, $scripturl, $modSettings;
 
-	echo '<script src="http://teknoromi.com/Themes/default/scripts/SSS.js" type="text/javascript"></script>
-          <script src="http://teknoromi.com/Themes/default/scripts/moaModal.js" type="text/javascript"></script>
-	<div id="boardindex_table" class="boardindex_table"><header class="main">
-			<nav style="display:none;">';
-			ssi_boardNews1();
-	echo'</nav></header>
-
-<div id="modal" class="block modal2" style="display:none;width:810px;height:169px;">
-<table width="100%"><td valign="top" style="border-radius: 5px;box-shadow: 0px 0px 2px; height: 200px; width: 26%;"><dd style="text-align: center;"><strong>Top 5 Bolum</strong></dd>';
-ssi_topBoards1();
-echo'</td><td valign="top" style="border-radius: 5px;box-shadow: 0px 0px 2px; height: 200px; width: 48%;"><dd style="text-align: center;"><strong>Top 5 Konu</strong></dd>';
-ssi_topTopics1();
-echo'</td><td valign="top" style="border-radius: 5px;box-shadow: 0px 0px 2px; height: 200px;width: 26%;"><strong><dd style="text-align: center;">Top 5 Uye</strong></dd>';
-ssi_topPoster1();
-echo'</td></table>
-</div>
-<script>
-$(function(){
-    $(\'.viewModal\').modal({
-        target : \'#modal\',
-        animation : \'zoom\',
-        position : \'center\'
-    });
-});
-</script>
-		<table class="table_list">
-		<div class="sagda">
-		<a href="#menu" class="menu-trigger"><span class="sonkonu">Son Konular</span></a>
-		<a class="viewModal"><span class="sonkonu">Top 5</span></a></div>';
+	echo '
+	<div id="boardindex_table" class="boardindex_table">
+		<table class="table_list">';
 
 	/* Each category in categories is made up of:
 	id, href, link, name, is_collapsed (is it collapsed?), can_collapse (is it okay if it is?),
@@ -124,7 +98,7 @@ $(function(){
 		echo '
 			<tbody class="header" id="category_', $category['id'], '">
 				<tr>
-					<td colspan="5">
+					<td colspan="4">
 						<div class="cat_bar">
 							<h3 class="catbg">';
 
@@ -180,19 +154,10 @@ $(function(){
 
 				// Show some basic information about the number of posts, etc.
 					echo '
-					</td>     <td class="windowbg stats"><a href="' . $scripturl . '?action=.xml;board=' . $board['id'] . ';type=rss"><img src="' . $settings['images_url'] . '/rss.png" style="float: right;margin-bottom: 4px;" alt="teknoloji" width="22px" height="20px" /></a>';
-   
-if($board['posts']<1) echo'<div id="teknolojihit" style="background-position: -0px -0px; width: 102px; height: 20px"></div>'; 
-elseif($board['topics']<5) echo'<div id="teknolojihit" style="background-position: -0px -30px; width: 102px; height: 20px"></div>'; 
-elseif($board['topics']<25) echo'<div id="teknolojihit" style="background-position: -0px -60px; width: 102px; height: 20px"></div>'; 
-elseif($board['topics']<51) echo'<div id="teknolojihit" style="background-position: -0px -90px; width: 102px; height: 20px"></div>'; 
-elseif($board['topics']<101) echo'<div id="teknolojihit" style="background-position: -0px -120px; width: 102px; height: 20px"></div>'; 
-elseif($board['topics']<151) echo'<div id="teknolojihit" style="background-position: -0px -150px; width: 102px; height: 20px"></div>'; 
-else echo'<div id="teknolojihit" style="background-position: -0px -150px; width: 102px; height: 20px"></div>'; 
-echo'   </td> 
+					</td>
 					<td class="windowbg stats">
 						<p>', comma_format($board['posts']), ' ', $board['is_redirect'] ? $txt['redirects'] : $txt['posts'], '
-						', $board['is_redirect'] ? '' : '<br /> '.comma_format($board['topics']) . ' ' . $txt['board_topics'], '
+						', $board['is_redirect'] ? '' : '<br> ' . comma_format($board['topics']) . ' ' . $txt['board_topics'], '
 						</p>
 					</td>
 					<td class="lastpost">';
@@ -226,7 +191,7 @@ echo'   </td>
 
 				echo '
 					<tr id="board_', $board['id'], '_children" class="windowbg2">
-						<td colspan="4" class="windowbg children">
+						<td colspan="3" class="windowbg children">
 							<p><strong>', $txt['sub_boards'], '</strong>: ', implode(', ', $children), '</p>
 						</td>
 					</tr>';
@@ -238,7 +203,7 @@ echo'   </td>
 		echo '
 			<tbody class="divider">
 				<tr>
-					<td colspan="5"></td>
+					<td colspan="4"></td>
 				</tr>
 			</tbody>';
 	}
@@ -247,8 +212,8 @@ echo'   </td>
 	</div>';
 
 	// Show the mark all as read button?
-	if ($context['user']['is_logged'] && $settings['show_mark_read'] && !empty($context['categories']))
-	echo '
+	if ($context['user']['is_logged'] && !empty($context['categories']))
+		echo '
 		<div class="mark_read">', template_button_strip($context['mark_read_button'], 'right'), '</div>';
 }
 
@@ -328,22 +293,12 @@ function template_ic_block_recent()
 
 	// This is the "Recent Posts" bar.
 	echo '
-	<div id="vtab">
-	   <ul>
-			 <li class="messages"><img class="icon"  src="', $settings['images_url'], '/message.png" alt="teknoloji" width="32" height="32"/></li>
-			 <li class="stats"><img class="icon"  src="', $settings['images_url'], '/Stat.png" alt="teknoloji" width="32" height="32"/></li>
-			<li class="online_users selected"><img class="icon"  src="', $settings['images_url'], '/User.png" alt="teknoloji" width="32" height="32"/></li>
-	   </ul><div style="display: none;">
 			<div class="title_barIC">
-				<h4>
-					<a href="', $scripturl, '?action=recent"><img class="icon" src="', $settings['images_url'], '/post/xx.png" alt="teknoloji" />', $txt['recent_posts'], '</a>
+				<h4 class="titlebg">
+					<a href="', $scripturl, '?action=recent"><img class="icon" src="', $settings['images_url'], '/post/xx.png" alt="">', $txt['recent_posts'], '</a>
 				</h4>
 			</div>
-			<div class="hslice" id="recent_posts_content">
-				<div class="entry-title" style="display: none;">', $context['forum_name_html_safe'], ' - ', $txt['recent_posts'], '</div>
-				<div class="entry-content" style="display: none;">
-					<a rel="feedurl" href="', $scripturl, '?action=.xml;type=webslice">', $txt['subscribe_webslice'], '</a>
-				</div>';
+			<div id="recent_posts_content">';
 
 	// Only show one post.
 	if ($settings['number_recent_posts'] == 1)
@@ -351,7 +306,7 @@ function template_ic_block_recent()
 		// latest_post has link, href, time, subject, short_subject (shortened with...), and topic. (its id.)
 		echo '
 				<p id="infocenter_onepost" class="inline">
-					<a href="', $scripturl, '?action=recent">', $txt['recent_view'], '</a>&nbsp;&quot;', sprintf($txt['is_recent_updated'], '&quot;' . $context['latest_post']['link'], '&quot;'), ' (', $context['latest_post']['time'], ')<br />
+					<a href="', $scripturl, '?action=recent">', $txt['recent_view'], '</a>&nbsp;&quot;', sprintf($txt['is_recent_updated'], '&quot;' . $context['latest_post']['link'], '&quot;'), ' (', $context['latest_post']['time'], ')<br>
 				</p>';
 	}
 	// Show lots of posts.
@@ -381,7 +336,7 @@ function template_ic_block_recent()
 				</table>';
 	}
 	echo '
-			</div></div>';
+			</div>';
 }
 
 function template_ic_block_calendar()
@@ -392,7 +347,7 @@ function template_ic_block_calendar()
 	echo '
 			<div class="title_barIC">
 				<h4 class="titlebg">
-					<a href="', $scripturl, '?action=calendar' . '"><img class="icon" src="', $settings['images_url'], '/icons/calendar.png', '" alt="" />', $context['calendar_only_today'] ? $txt['calendar_today'] : $txt['calendar_upcoming'], '</a>
+					<a href="', $scripturl, '?action=calendar' . '"><img class="icon" src="', $settings['images_url'], '/icons/calendar.png', '" alt="">', $context['calendar_only_today'] ? $txt['calendar_today'] : $txt['calendar_upcoming'], '</a>
 				</h4>
 			</div>';
 
@@ -426,7 +381,7 @@ function template_ic_block_calendar()
 		//		title, href, is_last, can_edit (are they allowed?), modify_href, and is_today.
 		foreach ($context['calendar_events'] as $event)
 			echo '
-					', $event['can_edit'] ? '<a href="' . $event['modify_href'] . '" title="' . $txt['calendar_edit'] . '"><img src="' . $settings['images_url'] . '/icons/calendar_modify.png" alt="*" class="centericon" /></a> ' : '', $event['href'] == '' ? '' : '<a href="' . $event['href'] . '">', $event['is_today'] ? '<strong>' . $event['title'] . '</strong>' : $event['title'], $event['href'] == '' ? '' : '</a>', $event['is_last'] ? '<br />' : ', ';
+					', $event['can_edit'] ? '<a href="' . $event['modify_href'] . '" title="' . $txt['calendar_edit'] . '"><img src="' . $settings['images_url'] . '/icons/calendar_modify.png" alt="*" class="centericon"></a> ' : '', $event['href'] == '' ? '' : '<a href="' . $event['href'] . '">', $event['is_today'] ? '<strong>' . $event['title'] . '</strong>' : $event['title'], $event['href'] == '' ? '' : '</a>', $event['is_last'] ? '<br>' : ', ';
 		echo '
 				</p>';
 	}
@@ -437,26 +392,26 @@ function template_ic_block_stats()
 	global $scripturl, $txt, $context, $settings;
 
 	// Show statistical style information...
-	echo '<div style="display: none;">
+	echo '
 			<div class="title_barIC">
-				<h4>
+				<h4 class="titlebg">
 					<a href="', $scripturl, '?action=stats" title="', $txt['more_stats'], '"><span class="stats_icon boards"></span>', $txt['forum_stats'], '</a>
 				</h4>
 			</div>
 			<p class="inline">
-				', $context['common_stats']['boardindex_total_posts'], '', !empty($settings['show_latest_member']) ? ' - '. $txt['latest_member'] . ': <strong> ' . $context['common_stats']['latest_member']['link'] . '</strong>' : '', '<br />
-				', (!empty($context['latest_post']) ? $txt['latest_post'] . ': <strong>&quot;' . $context['latest_post']['link'] . '&quot;</strong>  (' . $context['latest_post']['time'] . ')<br />' : ''), '
+				', $context['common_stats']['boardindex_total_posts'], '', !empty($settings['show_latest_member']) ? ' - '. $txt['latest_member'] . ': <strong> ' . $context['common_stats']['latest_member']['link'] . '</strong>' : '', '<br>
+				', (!empty($context['latest_post']) ? $txt['latest_post'] . ': <strong>&quot;' . $context['latest_post']['link'] . '&quot;</strong>  (' . $context['latest_post']['time'] . ')<br>' : ''), '
 				<a href="', $scripturl, '?action=recent">', $txt['recent_view'], '</a>
-			</p></div>';
+			</p>';
 }
 
 function template_ic_block_online()
 {
 	global $context, $scripturl, $txt, $modSettings;
 	// "Users online" - in order of activity.
-	echo '<div style="display: none;">
+	echo '
 			<div class="title_barIC">
-				<h4>
+				<h4 class="titlebg">
 					', $context['show_who'] ? '<a href="' . $scripturl . '?action=who">' : '', '<span class="stats_icon people"></span>', $txt['online_users'], '', $context['show_who'] ? '</a>' : '', '
 				</h4>
 			</div>
@@ -478,7 +433,7 @@ function template_ic_block_online()
 	echo $context['show_who'] ? '</a>' : '', '
 
 				&nbsp;-&nbsp;', $txt['most_online_today'], ': <strong>', comma_format($modSettings['mostOnlineToday']), '</strong>&nbsp;-&nbsp;
-				', $txt['most_online_ever'], ': ', comma_format($modSettings['mostOnline']), ' (', timeformat($modSettings['mostDate']), ')<br />';
+				', $txt['most_online_ever'], ': ', comma_format($modSettings['mostOnline']), ' (', timeformat($modSettings['mostDate']), ')<br>';
 
 	// Assuming there ARE users online... each user in users_online has an id, username, name, group, href, and link.
 	if (!empty($context['users_online']))
@@ -493,7 +448,6 @@ function template_ic_block_online()
 	}
 
 	echo '
-			</p></div></div>';
+			</p>';
 }
-
 ?>
