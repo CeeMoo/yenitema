@@ -184,11 +184,7 @@ function template_body_above()
 	global $context, $settings, $options, $scripturl, $txt, $modSettings;
 
 	echo '
-    <div id="wrapper">
-	<div id="filmmenu">
-	 <a class="homecon" href="',$scripturl,'"></a>
-	 ' , template_menu() ,'
-	</div>';
+    <div id="wrapper">';
 
    echo '
 	<div id="header">
