@@ -1157,8 +1157,7 @@ animation-name: hatch;
  padding:5px;
  margin:3px;
  }
- .haber{height: 250px; float: left; width: 332px; margin: 4px 3px; background: none repeat scroll 0% 0% white; border-radius: 6px; box-shadow: 1px 1px 3px;}
- .yorum{border: 2px solid rgb(170, 170, 170); box-shadow: 0px 0px 30px rgb(170, 170, 170) inset; border-radius: 5px;}
+.haber{height: 250px; float: left; width: 334px; margin: 1px 1px; background: none repeat scroll 0% 0% white; border-radius: 6px; box-shadow: 1px 1px 3px;} .yorum{border: 2px solid rgb(170, 170, 170); box-shadow: 0px 0px 30px rgb(170, 170, 170) inset; border-radius: 5px;}
 
 /* Browser Resets */
 .flex-container a:active,
