@@ -420,10 +420,10 @@ echo'
 }
 
 function slider() {
-
+    global $settings;
     echo '		
-    <script type="text/javascript" src="http://localhost/smf/Themes/filmtheme/scripts/jquery.js"></script>
-    <script type="text/javascript" src="http://localhost/smf/Themes/filmtheme/scripts/jquery_002.js"></script>';
+    <script type="text/javascript" src="', $settings['theme_url'], '/scripts/jquery.js"></script>
+    <script type="text/javascript" src="', $settings['theme_url'], '/scripts/jquery_002.js"></script>';
 		
  global $smcFunc, $scripturl, $settings, $options, $txt ,$context, $modSettings;
 		
@@ -457,12 +457,20 @@ $smcFunc['db_free_result']($request);
 	<div class="flexslider">
 		<ul class="slides">
 			';
-foreach ($topics as $topic)
-  echo '
-       
-<li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; display: none;"><a  href="', $scripturl, '?topic=', $topic['id_topic'], '.0">',  $topic['first_image'], ' </a> 
-<p>', $topic['subject'], '</p>
-			</li>';
+		 foreach ($topics as $topic)
+			if (!empty($topic['first_image']))
+				echo '
+                <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; display: none;"><a  href="', $scripturl, '?topic=', $topic['id_topic'], '.0">',  $topic['first_image'], ' </a> 
+                 <p>', $topic['subject'], '</p>
+			    </li>';
+								
+			else {
+				echo '
+                  <li class="" style="width: 100%; float: left; margin-right: -100%; position: relative; display: none;"><a  href="', $scripturl, '?topic=', $topic['id_topic'], '.0"><img src="'.$settings['images_url'].'/th_resimyok.gif" alt="" /></a> 
+                  <p>', $topic['subject'], '</p>
+			</li>';				
+			}      
+
 echo '</ul>
 	<ul class="flex-direction-nav"><li><a class="flex-prev" href="#">Previous</a></li><li><a class="flex-next" href="#">Next</a></li></ul></div>
 </div>
