@@ -14,6 +14,9 @@ $txt['admin_youtube'] = 'Enable YouTube?';
 $txt['admin_rss'] = 'Enable RSS?';
 
 
+ $txt['ososlide'] = 'board seçme aktif et';
+ $txt['ososlide1'] = 'board numarası gir';
+
 // Url's
 $txt['admin_twitter_one'] = 'Url of your Twitter page?';
 $txt['admin_google_one'] = 'Url of your Google plus+ page?';

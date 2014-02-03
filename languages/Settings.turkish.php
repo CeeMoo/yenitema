@@ -12,7 +12,8 @@ $txt['admin_google'] = 'Aktif Et Google plus+?';
 $txt['admin_facebook'] = 'Aktif Et Facebook?';
 $txt['admin_youtube'] = 'Aktif Et YouTube?';
 $txt['admin_rss'] = 'Aktif Et RSS?';
-
+ $txt['ososlide'] = 'board seçme aktif et';
+ $txt['ososlide1'] = 'board numarasý gir';
 
 // Url's
 $txt['admin_twitter_one'] = 'Twitter Sayfanýzýn url si?';

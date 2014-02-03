@@ -180,6 +180,15 @@ function template_settings()
 		),
       
 		 '',
+		array(
+	        'id' => 'ososlide',
+	        'label' => $txt['ososlide'],
+        ),
+		array(
+	        'id' => 'ososlide1',
+	        'label' => $txt['ososlide1'],
+	        'type' => 'text',
+        ),
 	array(
 	        'id' => 'active_twitter',
 	        'label' => $txt['admin_twitter'],

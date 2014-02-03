@@ -426,8 +426,9 @@ function slider() {
     <script type="text/javascript" src="', $settings['theme_url'], '/scripts/jquery_002.js"></script>';
 		
  global $smcFunc, $scripturl, $settings, $options, $txt ,$context, $modSettings;
-		
-$boards=array(1,2,3,4,5);
+ if (!empty($settings['ososlide']))
+		$board = !empty($settings['ososlide1']) ? explode('|', $settings['ososlide1']) : null;	
+else{$board=array(1);}
 
 $request = $smcFunc['db_query']('', '
   SELECT t.id_topic, m.subject, m.body
@@ -437,7 +438,7 @@ $request = $smcFunc['db_query']('', '
   ORDER BY t.id_topic DESC
        LIMIT {int:limit}',
   array(
-    'boards' => $boards,
+    'boards' => $board,
                'limit' => 5,
   )
 );
