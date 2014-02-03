@@ -947,7 +947,7 @@ span.hidelink{font-style:italic;}
 @media print{#headerarea{display:none;}
 .tborder{border:none;}
 }
-#fottmenu{position:absolute;width: 1055px;font-family:arial, sans-serif;margin:0 auto;clear:both;margin-top: 40px;background: #fff;font-size: 10px;}
+#fottmenu{position:absolute;width: 1055px;font-family:arial, sans-serif;margin:0 auto;clear:both;margin-top: 40px;background: #fff;font-size: 10px;padding: 0 5px;}
 
 #vtab{margin:auto;height:100%;}
 #vtab > ul > li{width:65px;height:65px;list-style-type:none;display:block;text-align:center;margin:auto;margin-top:10px;padding-bottom:10px;position:relative;opacity:.3;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=30);}
@@ -1157,7 +1157,7 @@ animation-name: hatch;
  padding:5px;
  margin:3px;
  }
- .haber{height: 250px; float: left; width: 334px; margin: 1px 1px; background: none repeat scroll 0% 0% white; border-radius: 6px; box-shadow: 1px 1px 3px;}
+ .haber{height: 250px; float: left; width: 332px; margin: 4px 3px; background: none repeat scroll 0% 0% white; border-radius: 6px; box-shadow: 1px 1px 3px;}
  .yorum{border: 2px solid rgb(170, 170, 170); box-shadow: 0px 0px 30px rgb(170, 170, 170) inset; border-radius: 5px;}
 
 /* Browser Resets */
