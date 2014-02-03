@@ -206,7 +206,7 @@ function template_body_above()
 		<div id="newscover">
 <div id="newscovery">
 <br/><h2>', $txt['news'], ': <br/>
-				', $context['random_news_line'], '</h2> </div></div>';
+				', $context['random_news_line'], '</h2> </div></div>'; ssi_rastgeleKonu();
 
 		 
     
@@ -515,5 +515,29 @@ function template_button_strip($button_strip, $direction = 'top', $strip_options
 			</ul>
 		</div>';
 }
+function ssi_rastgeleKonu($bolum = null)
+{
+	global $smcFunc, $scripturl;
 
+	$bolum = empty($bolum) ? (isset($_GET['bolum']) ? (int) $_GET['bolum'] : 0) : (int) $bolum;
+	$bolum = max(1, $bolum); // Sifirin altinda bir bolum düsünemiyorum. :)
+
+	$request = $smcFunc['db_query']('', "
+		SELECT t.id_topic, m.subject
+		FROM {db_prefix}topics AS t
+		LEFT JOIN {db_prefix}messages AS m
+			ON (m.id_msg = t.id_first_msg)
+		WHERE m.ID_BOARD = {string:bolum}
+		ORDER BY RAND()
+		LIMIT 1",
+		array(
+			'bolum' => $bolum,
+		)
+	);
+
+	 list($konu_no, $konu_baslik) = $smcFunc['db_fetch_row']($request);
+	$smcFunc['db_free_result']($request);
+
+	echo 'Sitemizden son Konular: <a href="', $scripturl, '?topic=', $konu_no, '"><i>', $konu_baslik, '</i></a>';
+}
 ?>
